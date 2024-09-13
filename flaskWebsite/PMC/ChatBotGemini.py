@@ -10,7 +10,10 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 
-genai.configure(api_key="AIzaSyAI0ZEVrsI-rjG-D8M2IV3yWxG_IGhqF7A")
+from dotenv import load_dotenv
+
+load_dotenv()
+genai.configure(api_key=os.getenv("KEY"))
 
 def get_pdf_text(pdf_docs):
     text = ''
@@ -34,7 +37,7 @@ def get_text_chunks(text):
     return chunks
 
 def get_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001')
+    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001', google_api_key=os.getenv('KEY'))
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local('faiss-index')
 
@@ -55,7 +58,7 @@ def get_conversational_chain():
     return chain
 
 def ChatBot(pdf_path: str,user_question: str):
-    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001')
+    embeddings = GoogleGenerativeAIEmbeddings(model='models/embedding-001', google_api_key=os.getenv('KEY'))
 
     try:
         new_db = FAISS.load_local('faiss-index', embeddings, allow_dangerous_deserialization=True)
