@@ -1,0 +1,11 @@
+google-generativeai
+faiss-cpu
+langchain
+langchain_google_genai
+google
+langchain_community
+Python-IO
+flask
+flask_cors
+pypdf
+
