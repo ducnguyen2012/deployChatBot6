@@ -11,8 +11,8 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from dotenv import load_dotenv
 import os
-
-# Load environment variables from the .env file
+import traceback
+# Load key từ env
 load_dotenv()
 genai.configure(api_key=os.getenv('KEY'))
 
@@ -34,19 +34,12 @@ def index():
             if not user_message:
                 return jsonify({"error": "Message is required"}), 400
             
-            # Debugging: Print user message
-            print(f"Received message: {user_message}")
-
-            # Call the ChatBot function
+            
             bot_response = ChatBot(FILEPATH, user_message)
 
-            # Debugging: Print bot response
-            print(f"Bot response: {bot_response}")
 
             return jsonify({"response": bot_response})
         except Exception as e:
-            # Print stack trace for debugging
-            import traceback
             print("An error occurred:", e)
             print(traceback.format_exc())
             return jsonify({"error": "An error occurred: " + str(e)}), 500
@@ -60,10 +53,8 @@ def mcq():
         num_questions = data.get('numQuestions')
         difficulty = data.get('tone')
         
-        # Call the MCQResponse function
         mcq_json = MCQResponse(num_questions, difficulty)
-        #print(mcq_json)
-        # Return the JSON response
+       
         return mcq_json, 200, {'Content-Type': 'application/json'}
     else:
         return render_template('MCQ.html')
