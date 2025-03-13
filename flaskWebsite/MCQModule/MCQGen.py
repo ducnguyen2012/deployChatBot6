@@ -39,7 +39,7 @@ def MCQResponse(num_questions, difficulty):
     prompt = difficulty_prompt.get(difficulty, "Invalid difficulty level. Please choose from 'easy', 'medium', or 'hard'.")
 
     # Initialize GenerativeModel
-    model = genai.GenerativeModel('gemini-pro')
+    model = genai.GenerativeModel('gemini-1.5-pro')
 
     # Generate content (MCQ questions)
     response = model.generate_content(prompt)
