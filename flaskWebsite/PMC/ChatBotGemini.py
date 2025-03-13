@@ -20,6 +20,7 @@ def get_pdf_text(pdf_docs):
     if pdf_docs is not None:
         if isinstance(pdf_docs, list):
             for pdf in pdf_docs:
+                #! gọi hàm đọc pdf có sẵn, sau đó đối với mỗi page đọc được thì preprocess nó và append vào kết quả cuối cùng
                 pdf_reader = PdfReader(BytesIO(pdf.read()))
                 for page in pdf_reader.pages:
                     text += page.extract_text()
@@ -75,7 +76,7 @@ def ChatBot(pdf_path: str,user_question: str):
 
     return response['output_text']
 
-# print(ChatBot("./Cells and Chemistry of Life.pdf", "What is a cell? answer in detail!"))
+
 
 
 
