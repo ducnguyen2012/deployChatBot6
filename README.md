@@ -6,7 +6,7 @@ This is a chatbot website designed to discuss topics related to cells and the ch
 
 To install the required dependencies, run the following command:
 ```
-cd pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 🖥️ Usage
 
